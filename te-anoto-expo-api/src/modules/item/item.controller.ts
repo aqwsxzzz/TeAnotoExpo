@@ -20,8 +20,12 @@ export class ItemController {
     return this.itemService.findAll();
   }
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<string> {
-    return `1 item by his #${id}`;
+  async findOne(@Param('id') id: number): Promise<Item | null> {
+    return this.itemService.findOneByPK(id);
+  }
+  @Get('type/:type')
+  async findByType(@Param('type') type: string): Promise<Item[] | null> {
+    return this.itemService.findByType(type);
   }
   @Post()
   async create(

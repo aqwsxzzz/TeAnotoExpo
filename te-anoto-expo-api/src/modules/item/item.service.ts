@@ -18,18 +18,26 @@ export class ItemService {
   //private storePriceService: StorepriceService,
 
   async create(item: CreateItemDto): Promise<Item> {
-    const { name, brand, quantity, userId } = item;
-    return this.itemModel.create({ name, brand, quantity, userId });
+    const { name, brand, quantity, type, userId } = item;
+    return this.itemModel.create({ name, brand, quantity, type, userId });
   }
   async findAll(): Promise<Item[]> {
     return this.itemModel.findAll();
+  }
+
+  async findOneByPK(itemId: number): Promise<Item | null> {
+    return this.itemModel.findByPk(itemId);
+  }
+
+  async findByType(type: string): Promise<Item[]> {
+    return this.itemModel.findAll({ where: { type } });
   }
 
   async findOneandUpdate(
     item: CreateItemDto,
     itemId: number,
   ): Promise<Item | null> {
-    const { name, brand, quantity } = item;
+    const { name, brand, quantity, type } = item;
 
     try {
       return await this.sequelize.transaction(async (t) => {
@@ -40,7 +48,10 @@ export class ItemService {
           transactionHost,
         );
 
-        await itemToUpdate?.update({ name, brand, quantity }, transactionHost);
+        await itemToUpdate?.update(
+          { name, brand, quantity, type },
+          transactionHost,
+        );
         return itemToUpdate;
       });
     } catch (err) {

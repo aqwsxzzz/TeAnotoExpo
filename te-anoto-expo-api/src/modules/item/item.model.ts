@@ -20,6 +20,9 @@ export class Item extends Model {
   @Column
   quantity: number;
 
+  @Column
+  type: string;
+
   @ForeignKey(() => User)
   @Column
   userId: number;
