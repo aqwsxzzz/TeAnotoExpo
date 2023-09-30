@@ -73,7 +73,6 @@ export class ItemService {
             where: { itemId: itemId },
             transaction: t,
           });
-          //await this.storePriceService.deleteByItemId(itemId);
         }
       });
     } catch (err) {
