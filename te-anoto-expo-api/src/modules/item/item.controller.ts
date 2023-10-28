@@ -15,6 +15,12 @@ import { Item } from './item.model';
 export class ItemController {
   constructor(private itemService: ItemService) {}
 
+  @Post()
+  async create(
+    @Body() createItemDto: CreateItemDto,
+  ): Promise<Item | undefined> {
+    return this.itemService.create(createItemDto);
+  }
   @Get()
   async findAll(): Promise<Item[]> {
     return this.itemService.findAll();
@@ -26,12 +32,6 @@ export class ItemController {
   @Get('type/:type')
   async findByType(@Param('type') type: string): Promise<Item[] | null> {
     return this.itemService.findByType(type);
-  }
-  @Post()
-  async create(
-    @Body() createItemDto: CreateItemDto,
-  ): Promise<Item | undefined> {
-    return this.itemService.create(createItemDto);
   }
   @Put('edit/:id')
   async findOneandEdit(@Body() item: CreateItemDto, @Param('id') id: number) {
