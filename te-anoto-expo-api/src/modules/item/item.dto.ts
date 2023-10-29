@@ -1,6 +1,6 @@
 export class CreateItemDto {
   name: string;
-  brand: string;
+  brandId: number;
   quantity: number;
   type: string;
   userId: number;

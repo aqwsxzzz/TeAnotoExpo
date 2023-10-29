@@ -4,7 +4,6 @@ import { Item } from './item.model';
 import { CreateItemDto } from './item.dto';
 import { Sequelize } from 'sequelize-typescript';
 import { StorePrice } from '../storeprice/storeprice.model';
-//import { StorepriceService } from '../storeprice/storeprice.service';
 
 @Injectable()
 export class ItemService {
@@ -15,11 +14,10 @@ export class ItemService {
     @InjectModel(StorePrice)
     private storePriceModel: typeof StorePrice,
   ) {}
-  //private storePriceService: StorepriceService,
 
   async create(item: CreateItemDto): Promise<Item> {
-    const { name, brand, quantity, type, userId } = item;
-    return this.itemModel.create({ name, brand, quantity, type, userId });
+    const { name, brandId, quantity, type, userId } = item;
+    return this.itemModel.create({ name, brandId, quantity, type, userId });
   }
   async findAll(): Promise<Item[]> {
     return this.itemModel.findAll();
@@ -33,11 +31,15 @@ export class ItemService {
     return this.itemModel.findAll({ where: { type } });
   }
 
+  async findByBrand(brandId: string): Promise<Item[]> {
+    return this.itemModel.findAll({ where: { brandId } });
+  }
+
   async findOneandUpdate(
     item: CreateItemDto,
     itemId: number,
   ): Promise<Item | null> {
-    const { name, brand, quantity, type } = item;
+    const { name, brandId, quantity, type } = item;
 
     try {
       return await this.sequelize.transaction(async (t) => {
@@ -49,7 +51,7 @@ export class ItemService {
         );
 
         await itemToUpdate?.update(
-          { name, brand, quantity, type },
+          { name, brandId, quantity, type },
           transactionHost,
         );
         return itemToUpdate;
@@ -68,11 +70,11 @@ export class ItemService {
           transactionHost,
         );
         if (itemToDelete) {
-          await itemToDelete.destroy(transactionHost);
           await this.storePriceModel.destroy({
             where: { itemId: itemId },
             transaction: t,
           });
+          await itemToDelete.destroy(transactionHost);
         }
       });
     } catch (err) {

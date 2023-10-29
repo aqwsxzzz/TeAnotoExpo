@@ -8,14 +8,12 @@ import {
 } from 'sequelize-typescript';
 import { User } from '../user/user.model';
 import { StorePrice } from '../storeprice/storeprice.model';
+import { Brand } from '../brand/brand.model';
 
 @Table
 export class Item extends Model {
   @Column
   name: string;
-
-  @Column
-  brand: string;
 
   @Column
   quantity: number;
@@ -29,6 +27,13 @@ export class Item extends Model {
 
   @BelongsTo(() => User)
   user: User;
+
+  @ForeignKey(() => Brand)
+  @Column
+  brandId: number;
+
+  @BelongsTo(() => Brand)
+  brand: Brand;
 
   @HasMany(() => StorePrice)
   storePrices: StorePrice[];

@@ -33,6 +33,11 @@ export class ItemController {
   async findByType(@Param('type') type: string): Promise<Item[] | null> {
     return this.itemService.findByType(type);
   }
+  @Get('brand/:brand')
+  async findByBrand(@Param('type') brand: string): Promise<Item[] | null> {
+    return this.itemService.findByBrand(brand);
+  }
+
   @Put('edit/:id')
   async findOneandEdit(@Body() item: CreateItemDto, @Param('id') id: number) {
     return this.itemService.findOneandUpdate(item, id);
