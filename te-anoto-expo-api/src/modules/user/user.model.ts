@@ -4,7 +4,7 @@ import { Item } from '../item/item.model';
 @Table
 export class User extends Model {
   @Column
-  name: string;
+  username: string;
 
   @Column
   email: string;

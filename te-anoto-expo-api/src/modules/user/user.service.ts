@@ -11,8 +11,8 @@ export class UserService {
   ) {}
 
   async create(user: CreateUserDto): Promise<User> {
-    const { name, email, password } = user;
-    return this.userModel.create({ name, email, password });
+    const { username, email, password } = user;
+    return this.userModel.create({ username, email, password });
   }
   async findOneByPK(id: string): Promise<User | null> {
     const user = await this.userModel.findByPk(id);
