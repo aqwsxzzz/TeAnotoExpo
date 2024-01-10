@@ -7,16 +7,19 @@ import { UserModule } from './modules/user/user.module';
 import { StoreModule } from './modules/store/store.module';
 import { StorepriceModule } from './modules/storeprice/storeprice.module';
 import { BrandModule } from './modules/brand/brand.module';
-
+import { AuthModule } from './modules/auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     SequelizeModule.forRoot({
       dialect: 'postgres',
       host: 'localhost',
       port: 5432,
-      username: 'postgres',
-      password: 'postgres',
-      database: 'TeAnotoExpoDB',
+      username: process.env.postgresUsername,
+      password: process.env.postgresPassword,
+      database: process.env.postgresDB,
+
       autoLoadModels: true,
       synchronize: true,
     }),
@@ -25,6 +28,7 @@ import { BrandModule } from './modules/brand/brand.module';
     StoreModule,
     StorepriceModule,
     BrandModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
