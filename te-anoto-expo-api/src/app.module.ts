@@ -11,7 +11,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true }),
     SequelizeModule.forRoot({
       dialect: 'postgres',
       host: 'localhost',
@@ -19,7 +19,6 @@ import { ConfigModule } from '@nestjs/config';
       username: process.env.postgresUsername,
       password: process.env.postgresPassword,
       database: process.env.postgresDB,
-
       autoLoadModels: true,
       synchronize: true,
     }),
