@@ -1,5 +1,5 @@
 export class CreateStorePriceDto {
   price: number;
-  itemId: number;
+  itemForPricesId: number;
   storeId: number;
 }

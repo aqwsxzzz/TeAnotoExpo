@@ -7,7 +7,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { User } from '../user/user.model';
-import { Item } from '../item/item.model';
+import { ItemforPrices } from '../itemforPrices/item.model';
 
 @Table
 export class Brand extends Model {
@@ -21,6 +21,6 @@ export class Brand extends Model {
   @BelongsTo(() => User)
   user: User;
 
-  @HasMany(() => Item)
-  storePrices: Item[];
+  @HasMany(() => ItemforPrices)
+  storePrices: ItemforPrices[];
 }

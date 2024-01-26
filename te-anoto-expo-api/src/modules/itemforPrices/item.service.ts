@@ -1,59 +1,56 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Item } from './item.model';
-import { CreateItemDto } from './item.dto';
+import { ItemforPrices } from './item.model';
+import { CreateItemforPricesDto } from './item.dto';
 import { Sequelize } from 'sequelize-typescript';
 import { StorePrice } from '../storeprice/storeprice.model';
 
 @Injectable()
 export class ItemService {
   constructor(
-    @InjectModel(Item)
-    private itemModel: typeof Item,
+    @InjectModel(ItemforPrices)
+    private itemforPricesModel: typeof ItemforPrices,
     private sequelize: Sequelize,
     @InjectModel(StorePrice)
     private storePriceModel: typeof StorePrice,
   ) {}
 
-  async create(item: CreateItemDto): Promise<Item> {
-    const { name, brandId, quantity, type, userId } = item;
-    return this.itemModel.create({ name, brandId, quantity, type, userId });
+  async create(item: CreateItemforPricesDto): Promise<ItemforPrices> {
+    const { name, brandId, type, userId } = item;
+    return this.itemforPricesModel.create({ name, brandId, type, userId });
   }
-  async findAll(): Promise<Item[]> {
-    return this.itemModel.findAll();
-  }
-
-  async findOneByPK(itemId: number): Promise<Item | null> {
-    return this.itemModel.findByPk(itemId);
+  async findAll(): Promise<ItemforPrices[]> {
+    return this.itemforPricesModel.findAll();
   }
 
-  async findByType(type: string): Promise<Item[]> {
-    return this.itemModel.findAll({ where: { type } });
+  async findOneByPK(itemId: number): Promise<ItemforPrices | null> {
+    return this.itemforPricesModel.findByPk(itemId);
   }
 
-  async findByBrand(brandId: string): Promise<Item[]> {
-    return this.itemModel.findAll({ where: { brandId } });
+  async findByType(type: string): Promise<ItemforPrices[]> {
+    return this.itemforPricesModel.findAll({ where: { type } });
+  }
+
+  async findByBrand(brandId: string): Promise<ItemforPrices[]> {
+    return this.itemforPricesModel.findAll({ where: { brandId } });
   }
 
   async findOneandUpdate(
-    item: CreateItemDto,
+    item: CreateItemforPricesDto,
     itemId: number,
-  ): Promise<Item | null> {
-    const { name, brandId, quantity, type } = item;
+  ): Promise<ItemforPrices | null> {
+    const { name, brandId, type } = item;
 
     try {
       return await this.sequelize.transaction(async (t) => {
         const transactionHost = { transaction: t };
 
-        const itemToUpdate = await this.itemModel.findByPk(
+        const itemToUpdate = await this.itemforPricesModel.findByPk(
           itemId,
           transactionHost,
         );
 
-        await itemToUpdate?.update(
-          { name, brandId, quantity, type },
-          transactionHost,
-        );
+        await itemToUpdate?.update({ name, brandId, type }, transactionHost);
         return itemToUpdate;
       });
     } catch (err) {
@@ -65,7 +62,7 @@ export class ItemService {
       return await this.sequelize.transaction(async (t) => {
         const transactionHost = { transaction: t };
 
-        const itemToDelete = await this.itemModel.findByPk(
+        const itemToDelete = await this.itemforPricesModel.findByPk(
           itemId,
           transactionHost,
         );

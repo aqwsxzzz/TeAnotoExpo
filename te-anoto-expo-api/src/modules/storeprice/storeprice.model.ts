@@ -5,7 +5,7 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { Item } from '../item/item.model';
+import { ItemforPrices } from '../itemforPrices/item.model';
 import { Store } from '../store/store.model';
 
 @Table
@@ -13,12 +13,12 @@ export class StorePrice extends Model {
   @Column
   price: number;
 
-  @ForeignKey(() => Item)
+  @ForeignKey(() => ItemforPrices)
   @Column
-  itemId: number;
+  itemForPricesId: number;
 
-  @BelongsTo(() => Item)
-  item: Item;
+  @BelongsTo(() => ItemforPrices)
+  itemForPrices: ItemforPrices;
 
   @ForeignKey(() => Store)
   @Column

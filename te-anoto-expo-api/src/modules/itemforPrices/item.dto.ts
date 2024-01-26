@@ -1,7 +1,6 @@
-export class CreateItemDto {
+export class CreateItemforPricesDto {
   name: string;
   brandId: number;
-  quantity: number;
   type: string;
   userId: number;
 }

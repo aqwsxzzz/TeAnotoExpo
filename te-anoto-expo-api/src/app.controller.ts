@@ -3,11 +3,13 @@ import { Request as RequestExpress } from 'express';
 import { LocalAuthGuard } from './modules/auth/local-auth.guard';
 import { AuthService } from './modules/auth/auth.service';
 import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
+import { Public } from './Decorators/publicDecorator';
 
 @Controller()
 export class AppController {
   constructor(private authService: AuthService) {}
 
+  @Public()
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Request() req: RequestExpress) {

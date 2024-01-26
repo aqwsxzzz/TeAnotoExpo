@@ -11,12 +11,9 @@ import { StorePrice } from '../storeprice/storeprice.model';
 import { Brand } from '../brand/brand.model';
 
 @Table
-export class Item extends Model {
+export class ItemforPrices extends Model {
   @Column
   name: string;
-
-  @Column
-  quantity: number;
 
   @Column
   type: string;
