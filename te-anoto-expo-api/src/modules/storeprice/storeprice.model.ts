@@ -5,7 +5,7 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { Item } from '../itemforPrices/item.model';
+import { Item } from '../item/item.model';
 import { Store } from '../store/store.model';
 
 @Table

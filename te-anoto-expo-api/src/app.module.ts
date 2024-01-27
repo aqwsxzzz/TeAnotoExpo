@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ItemforPricesModule } from './modules/itemforPrices/item.module';
+import { ItemforPricesModule } from './modules/item/item.module';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { UserModule } from './modules/user/user.module';
 import { StoreModule } from './modules/store/store.module';

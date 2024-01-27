@@ -3,7 +3,7 @@ import { Brand } from './brand.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { Sequelize } from 'sequelize-typescript';
 import { CreateBrandDto } from './brand.dto';
-import { Item } from '../itemforPrices/item.model';
+import { Item } from '../item/item.model';
 
 @Injectable()
 export class BrandService {
