@@ -3,7 +3,7 @@ import { Brand } from './brand.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { Sequelize } from 'sequelize-typescript';
 import { CreateBrandDto } from './brand.dto';
-import { ItemforPrices } from '../itemforPrices/item.model';
+import { Item } from '../itemforPrices/item.model';
 
 @Injectable()
 export class BrandService {
@@ -11,8 +11,8 @@ export class BrandService {
     @InjectModel(Brand)
     private brandModel: typeof Brand,
     private sequelize: Sequelize,
-    @InjectModel(ItemforPrices)
-    private itemModel: typeof ItemforPrices,
+    @InjectModel(Item)
+    private itemModel: typeof Item,
   ) {}
 
   async create(brand: CreateBrandDto): Promise<Brand> {

@@ -1,45 +1,51 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { ItemforPrices } from './item.model';
-import { CreateItemforPricesDto } from './item.dto';
+import { Item } from './item.model';
+import { CreateItemDto } from './item.dto';
 import { Sequelize } from 'sequelize-typescript';
 import { StorePrice } from '../storeprice/storeprice.model';
 
 @Injectable()
 export class ItemService {
   constructor(
-    @InjectModel(ItemforPrices)
-    private itemforPricesModel: typeof ItemforPrices,
+    @InjectModel(Item)
+    private itemforPricesModel: typeof Item,
     private sequelize: Sequelize,
     @InjectModel(StorePrice)
     private storePriceModel: typeof StorePrice,
   ) {}
 
-  async create(item: CreateItemforPricesDto): Promise<ItemforPrices> {
-    const { name, brandId, type, userId } = item;
-    return this.itemforPricesModel.create({ name, brandId, type, userId });
+  async create(item: CreateItemDto): Promise<Item> {
+    const { name, brandId, quantity, type, userId } = item;
+    return this.itemforPricesModel.create({
+      name,
+      brandId,
+      quantity,
+      type,
+      userId,
+    });
   }
-  async findAll(): Promise<ItemforPrices[]> {
+  async findAll(): Promise<Item[]> {
     return this.itemforPricesModel.findAll();
   }
 
-  async findOneByPK(itemId: number): Promise<ItemforPrices | null> {
+  async findOneByPK(itemId: number): Promise<Item | null> {
     return this.itemforPricesModel.findByPk(itemId);
   }
 
-  async findByType(type: string): Promise<ItemforPrices[]> {
+  async findByType(type: string): Promise<Item[]> {
     return this.itemforPricesModel.findAll({ where: { type } });
   }
 
-  async findByBrand(brandId: string): Promise<ItemforPrices[]> {
+  async findByBrand(brandId: string): Promise<Item[]> {
     return this.itemforPricesModel.findAll({ where: { brandId } });
   }
 
   async findOneandUpdate(
-    item: CreateItemforPricesDto,
+    item: CreateItemDto,
     itemId: number,
-  ): Promise<ItemforPrices | null> {
-    const { name, brandId, type } = item;
+  ): Promise<Item | null> {
+    const { name, brandId, quantity, type } = item;
 
     try {
       return await this.sequelize.transaction(async (t) => {
@@ -50,7 +56,10 @@ export class ItemService {
           transactionHost,
         );
 
-        await itemToUpdate?.update({ name, brandId, type }, transactionHost);
+        await itemToUpdate?.update(
+          { name, brandId, quantity, type },
+          transactionHost,
+        );
         return itemToUpdate;
       });
     } catch (err) {

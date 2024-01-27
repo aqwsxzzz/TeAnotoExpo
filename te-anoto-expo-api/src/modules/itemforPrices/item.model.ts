@@ -11,12 +11,15 @@ import { StorePrice } from '../storeprice/storeprice.model';
 import { Brand } from '../brand/brand.model';
 
 @Table
-export class ItemforPrices extends Model {
+export class Item extends Model {
   @Column
   name: string;
 
   @Column
   type: string;
+
+  @Column
+  quantity: number;
 
   @ForeignKey(() => User)
   @Column

@@ -19,8 +19,7 @@ export class AuthService {
 
   async loginToken(user: any) {
     const payload = {
-      username: user.dataValues.username,
-      sub: user.dataValues.id,
+      userId: user.dataValues.id,
     };
 
     return {

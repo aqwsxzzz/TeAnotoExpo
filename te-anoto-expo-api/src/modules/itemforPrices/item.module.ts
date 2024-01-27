@@ -3,10 +3,10 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { ItemController } from './item.controller';
 import { ItemService } from './item.service';
 import { StorePrice } from '../storeprice/storeprice.model';
-import { ItemforPrices } from './item.model';
+import { Item } from './item.model';
 
 @Module({
-  imports: [SequelizeModule.forFeature([ItemforPrices, StorePrice])],
+  imports: [SequelizeModule.forFeature([Item, StorePrice])],
 
   providers: [ItemService],
   controllers: [ItemController],

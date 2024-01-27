@@ -7,7 +7,7 @@ import {
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
-import { ItemforPrices } from '../itemforPrices/item.model';
+import { Item } from '../itemforPrices/item.model';
 
 @Table
 export class User extends Model {
@@ -25,6 +25,6 @@ export class User extends Model {
   @Column
   password: string;
 
-  @HasMany(() => ItemforPrices)
-  items: ItemforPrices[];
+  @HasMany(() => Item)
+  items: Item[];
 }
