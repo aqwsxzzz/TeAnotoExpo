@@ -1,7 +1,6 @@
-export class CreateStoreDto {
+export class CreateGroceryListDto {
   id?: number;
   name: string;
-  isPublic: boolean;
   userId?: number;
   groupId?: number;
 }

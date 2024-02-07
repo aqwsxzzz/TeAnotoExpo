@@ -1,4 +1,6 @@
 export class CreateBrandDto {
+  id?: number;
   name: string;
-  userId: number;
+  userId?: number;
+  groupId?: number;
 }

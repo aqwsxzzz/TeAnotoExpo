@@ -7,19 +7,23 @@ import {
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
+import { GroceryList } from '../grocerylist/grocerylist.model';
 import { Item } from '../item/item.model';
-import { Store } from '../store/store.model';
-import { CreateStorePriceDto } from './storeprice.dto';
+import { CreateInterListItemDto } from './inter-list-item.dto';
 
 @Table
-export class StorePrice extends Model<CreateStorePriceDto> {
+export class InterListItem extends Model<CreateInterListItemDto> {
   @PrimaryKey
   @AutoIncrement
   @Column
   id: number;
 
+  @ForeignKey(() => GroceryList)
   @Column
-  price: number;
+  groceryListId: number;
+
+  @BelongsTo(() => GroceryList)
+  groceryList: GroceryList;
 
   @ForeignKey(() => Item)
   @Column
@@ -27,11 +31,4 @@ export class StorePrice extends Model<CreateStorePriceDto> {
 
   @BelongsTo(() => Item)
   item: Item;
-
-  @ForeignKey(() => Store)
-  @Column
-  storeId: number;
-
-  @BelongsTo(() => Store)
-  store: Store;
 }

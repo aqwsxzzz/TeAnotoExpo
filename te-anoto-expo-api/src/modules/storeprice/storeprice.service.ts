@@ -13,8 +13,8 @@ export class StorepriceService {
   ) {}
 
   async create(storeprice: CreateStorePriceDto): Promise<StorePrice> {
-    const { price, itemForPricesId, storeId } = storeprice;
-    return this.storepriceModel.create({ price, itemForPricesId, storeId });
+    const { price, itemId, storeId } = storeprice;
+    return this.storepriceModel.create({ price, itemId, storeId });
   }
 
   async findOneandUpdate(

@@ -16,8 +16,8 @@ export class StoreService {
   ) {}
 
   async create(store: CreateStoreDto): Promise<Store> {
-    const { name } = store;
-    return this.storeModel.create({ name });
+    const { name, isPublic } = store;
+    return this.storeModel.create({ name, isPublic });
   }
 
   async findAll(): Promise<Store[]> {

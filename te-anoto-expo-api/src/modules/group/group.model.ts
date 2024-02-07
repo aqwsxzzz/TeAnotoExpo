@@ -1,50 +1,49 @@
 import {
   AutoIncrement,
+  BelongsTo,
   Column,
-  DataType,
+  ForeignKey,
   HasMany,
   Model,
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
-import { Item } from '../item/item.model';
-import { Group } from '../group/group.model';
+import { User } from '../user/user.model';
 import { Brand } from '../brand/brand.model';
-import { Store } from '../store/store.model';
 import { InterGroupUsers } from '../inter-group-users/inter-group-users.model';
+import { Item } from '../item/item.model';
+import { Store } from '../store/store.model';
 import { GroceryList } from '../grocerylist/grocerylist.model';
-import { CreateUserDto } from './user.dto';
+import { CreateGroupDto } from './group.dto';
 
 @Table
-export class User extends Model<CreateUserDto> {
+export class Group extends Model<CreateGroupDto> {
   @PrimaryKey
   @AutoIncrement
-  @Column(DataType.INTEGER)
+  @Column
   id: number;
 
   @Column
-  username: string;
+  name: string;
 
+  @ForeignKey(() => User)
   @Column
-  email: string;
+  userId: number;
 
-  @Column
-  password: string;
-
-  @HasMany(() => Item)
-  item: Item[];
-
-  @HasMany(() => Group)
-  group: Group[];
+  @BelongsTo(() => User)
+  user: User;
 
   @HasMany(() => Brand)
   brand: Brand[];
 
-  @HasMany(() => Store)
-  store: Store[];
-
   @HasMany(() => InterGroupUsers)
   interGroupUsers: InterGroupUsers[];
+
+  @HasMany(() => Item)
+  item: Item[];
+
+  @HasMany(() => Store)
+  store: Store[];
 
   @HasMany(() => GroceryList)
   groceryList: GroceryList[];

@@ -11,6 +11,10 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
+import { GroupModule } from './modules/group/group.module';
+import { InterGroupUsersModule } from './modules/inter-group-users/inter-group-users.module';
+import { GrocerylistModule } from './modules/grocerylist/grocerylist.module';
+import { InterListItemModule } from './modules/inter-list-item/inter-list-item.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -30,6 +34,10 @@ import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
     StorepriceModule,
     BrandModule,
     AuthModule,
+    GroupModule,
+    InterGroupUsersModule,
+    GrocerylistModule,
+    InterListItemModule,
   ],
   controllers: [AppController],
   providers: [
