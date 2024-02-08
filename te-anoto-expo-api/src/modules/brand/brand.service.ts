@@ -19,8 +19,8 @@ export class BrandService {
     const { name, userId } = brand;
     return this.brandModel.create({ name, userId });
   }
-  async findAll(): Promise<Brand[]> {
-    return this.brandModel.findAll();
+  async findAllByUserId(userId: number): Promise<Brand[]> {
+    return this.brandModel.findAll({ where: { userId } });
   }
 
   async findOneByPK(brandId: number): Promise<Brand | null> {

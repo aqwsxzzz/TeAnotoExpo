@@ -5,5 +5,4 @@ export class CreateItemDto {
   type: string;
   brandId: number;
   userId?: number;
-  groupId?: number;
 }

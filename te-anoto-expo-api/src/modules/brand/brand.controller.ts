@@ -21,9 +21,9 @@ export class BrandController {
   ): Promise<Brand | undefined> {
     return this.brandService.create(createItemDto);
   }
-  @Get()
-  async findAll(): Promise<Brand[]> {
-    return this.brandService.findAll();
+  @Get(':userId')
+  async findAllByUserId(@Param('userId') userId: number): Promise<Brand[]> {
+    return this.brandService.findAllByUserId(userId);
   }
   @Get(':id')
   async findOne(@Param('id') id: number): Promise<Brand | null> {

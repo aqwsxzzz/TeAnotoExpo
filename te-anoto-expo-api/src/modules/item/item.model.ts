@@ -4,7 +4,6 @@ import {
   Column,
   ForeignKey,
   HasMany,
-  Index,
   Model,
   PrimaryKey,
   Table,
@@ -12,7 +11,6 @@ import {
 import { User } from '../user/user.model';
 import { StorePrice } from '../storeprice/storeprice.model';
 import { Brand } from '../brand/brand.model';
-import { Group } from '../group/group.model';
 import { CreateItemDto } from './item.dto';
 import { InterListItem } from '../inter-list-item/inter-list-item.model';
 
@@ -38,24 +36,6 @@ export class Item extends Model<CreateItemDto> {
 
   @BelongsTo(() => User)
   user: User;
-
-  @ForeignKey(() => Group)
-  @Column
-  groupId: number;
-
-  @BelongsTo(() => Group)
-  group: Group;
-
-  // @Index({
-  //   unique: true,
-  //   where: {
-  //     $or: [
-  //       { userId: { $not: null }, groupId: { $eq: null } },
-  //       { userId: { $eq: null }, groupId: { $not: null } },
-  //     ],
-  //   },
-  // })
-  // uniqueConnstraint: string;
 
   @ForeignKey(() => Brand)
   @Column

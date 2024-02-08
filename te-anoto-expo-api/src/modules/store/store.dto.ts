@@ -3,5 +3,4 @@ export class CreateStoreDto {
   name: string;
   isPublic: boolean;
   userId?: number;
-  groupId?: number;
 }
