@@ -17,9 +17,9 @@ export class BrandController {
 
   @Post()
   async create(
-    @Body() createItemDto: CreateBrandDto,
+    @Body() createBrandDto: CreateBrandDto,
   ): Promise<Brand | undefined> {
-    return this.brandService.create(createItemDto);
+    return this.brandService.create(createBrandDto);
   }
   @Get(':userId')
   async findAllByUserId(@Param('userId') userId: number): Promise<Brand[]> {
@@ -30,11 +30,14 @@ export class BrandController {
     return this.brandService.findOneByPK(id);
   }
   @Put('edit/:id')
-  async findOneandEdit(@Body() item: CreateBrandDto, @Param('id') id: number) {
-    return this.brandService.findOneandUpdate(item, id);
+  async findOneandEdit(
+    @Body() brand: CreateBrandDto,
+    @Param('id') brandId: number,
+  ) {
+    return this.brandService.findOneandUpdate(brand, brandId);
   }
   @Delete(':id')
-  async delete(@Param('id') id: number) {
-    return this.brandService.deleteById(id);
+  async delete(@Param('id') brandId: number) {
+    return this.brandService.deleteById(brandId);
   }
 }

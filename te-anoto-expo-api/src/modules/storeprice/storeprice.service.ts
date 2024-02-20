@@ -62,4 +62,10 @@ export class StorepriceService {
       where: { itemId: itemId },
     });
   }
+  async findByItemId(itemId: number): Promise<StorePrice[]> {
+    return this.storepriceModel.findAll({ where: { itemId } });
+  }
+  async findByStoreId(storeId: number): Promise<StorePrice[]> {
+    return this.storepriceModel.findAll({ where: { storeId } });
+  }
 }

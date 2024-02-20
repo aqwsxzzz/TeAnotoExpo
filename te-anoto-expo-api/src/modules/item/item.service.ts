@@ -4,6 +4,7 @@ import { Item } from './item.model';
 import { CreateItemDto } from './item.dto';
 import { Sequelize } from 'sequelize-typescript';
 import { StorePrice } from '../storeprice/storeprice.model';
+import { InterListItem } from '../inter-list-item/inter-list-item.model';
 
 @Injectable()
 export class ItemService {
@@ -13,6 +14,8 @@ export class ItemService {
     private sequelize: Sequelize,
     @InjectModel(StorePrice)
     private storePriceModel: typeof StorePrice,
+    @InjectModel(InterListItem)
+    private interListItem: typeof InterListItem,
   ) {}
 
   async create(item: CreateItemDto): Promise<Item> {
@@ -77,6 +80,10 @@ export class ItemService {
         );
         if (itemToDelete) {
           await this.storePriceModel.destroy({
+            where: { itemId: itemId },
+            transaction: t,
+          });
+          await this.interListItem.destroy({
             where: { itemId: itemId },
             transaction: t,
           });

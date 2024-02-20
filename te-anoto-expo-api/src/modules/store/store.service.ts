@@ -16,12 +16,14 @@ export class StoreService {
   ) {}
 
   async create(store: CreateStoreDto): Promise<Store> {
-    const { name, isPublic } = store;
-    return this.storeModel.create({ name, isPublic });
+    const { name, isPublic, userId } = store;
+    return isPublic
+      ? this.storeModel.create({ name, isPublic })
+      : this.storeModel.create({ name, isPublic, userId });
   }
 
-  async findAll(): Promise<Store[]> {
-    return this.storeModel.findAll();
+  async findAllPublicNByuserId(userId: number): Promise<Store[]> {
+    return this.storeModel.findAll({ where: { isPublic: true || userId } });
   }
 
   async EditByPk(
