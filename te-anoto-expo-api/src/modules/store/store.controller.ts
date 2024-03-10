@@ -21,9 +21,9 @@ export class StoreController {
   ): Promise<Store | undefined> {
     return this.storeService.create(createStoreDto);
   }
-  @Get()
-  async findAll(): Promise<Store[]> {
-    return this.storeService.findAll();
+  @Get(':id')
+  async findAllPublicNByUserId(@Param('id') id: number): Promise<Store[]> {
+    return this.storeService.findAllPublicNByuserId(id);
   }
   @Put('edit/:id')
   async findOneandUpdate(

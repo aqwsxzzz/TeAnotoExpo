@@ -20,6 +20,10 @@ export class GrocerylistService {
     return this.groceryListModel.create({ name, userId });
   }
 
+  async findAllByUserId(userId: number): Promise<GroceryList[]> {
+    return this.groceryListModel.findAll({ where: { userId } });
+  }
+
   async findOneandUpdate(
     groceryList: CreateGroceryListDto,
     groceryListId: number,

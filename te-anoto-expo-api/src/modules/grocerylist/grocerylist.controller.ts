@@ -21,4 +21,17 @@ export class GrocerylistController {
   ): Promise<GroceryList | undefined> {
     return this.grocerylistService.create(CreateGroceryListDto);
   }
+  @Get(':userId')
+  async findAllByuserId(
+    @Param('userId') userId: number,
+  ): Promise<GroceryList[]> {
+    return this.grocerylistService.findAllByUserId(userId);
+  }
+  @Put('edit/:id')
+  async findOneandEdit(
+    @Body() groceryList: CreateGroceryListDto,
+    @Param('id') groceryListId: number,
+  ) {
+    return this.grocerylistService.findOneandUpdate(groceryList, groceryListId);
+  }
 }
