@@ -30,5 +30,5 @@ export class Brand extends Model<CreateBrandDto> {
   user: User;
 
   @HasMany(() => Item)
-  storePrices: Item[];
+  item: Item[];
 }

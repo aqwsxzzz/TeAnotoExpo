@@ -7,6 +7,7 @@ import {
   BelongsTo,
   PrimaryKey,
   AutoIncrement,
+  DataType,
 } from 'sequelize-typescript';
 import { StorePrice } from '../storeprice/storeprice.model';
 import { User } from '../user/user.model';
@@ -22,7 +23,7 @@ export class Store extends Model<CreateStoreDto> {
   @Column
   name: string;
 
-  @Column
+  @Column({ type: DataType.BOOLEAN, allowNull: false, defaultValue: false })
   isPublic: boolean;
 
   @HasMany(() => StorePrice)
