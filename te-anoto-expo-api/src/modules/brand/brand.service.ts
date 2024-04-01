@@ -23,7 +23,9 @@ export class BrandService {
 
   async create(brand: CreateBrandDto): Promise<Brand> {
     const { name, userId, isPublic } = brand;
-    return this.brandModel.create({ name, userId, isPublic });
+    return isPublic
+      ? this.brandModel.create({ name, isPublic })
+      : this.brandModel.create({ name, userId, isPublic });
   }
   async findAllByUserId(userId: number): Promise<Brand[]> {
     return this.brandModel.findAll({ where: { userId } });

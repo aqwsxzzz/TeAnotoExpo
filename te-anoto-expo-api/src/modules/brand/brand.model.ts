@@ -2,6 +2,7 @@ import {
   AutoIncrement,
   BelongsTo,
   Column,
+  DataType,
   ForeignKey,
   HasMany,
   Model,
@@ -18,6 +19,9 @@ export class Brand extends Model<CreateBrandDto> {
   @AutoIncrement
   @Column
   id: number;
+
+  @Column({ type: DataType.BOOLEAN, allowNull: false, defaultValue: false })
+  isPublic: boolean;
 
   @Column
   name: string;
