@@ -27,24 +27,28 @@ export class GrocerylistService {
   async findOneandUpdate(
     groceryList: CreateGroceryListDto,
     groceryListId: number,
-  ): Promise<GroceryList | null> {
+  ): Promise<void> {
     const { name } = groceryList;
 
-    try {
-      return await this.sequelize.transaction(async (t) => {
-        const transactionHost = { transaction: t };
+    await this.groceryListModel.update(
+      { name },
+      { where: { id: groceryListId } },
+    );
+    // try {
+    //   return await this.sequelize.transaction(async (t) => {
+    //     const transactionHost = { transaction: t };
 
-        const groceryListToUpdate = await this.groceryListModel.findByPk(
-          groceryListId,
-          transactionHost,
-        );
+    //     const groceryListToUpdate = await this.groceryListModel.findByPk(
+    //       groceryListId,
+    //       transactionHost,
+    //     );
 
-        await groceryListToUpdate?.update({ name }, transactionHost);
-        return groceryListToUpdate;
-      });
-    } catch (err) {
-      return err;
-    }
+    //     await groceryListToUpdate?.update({ name }, transactionHost);
+    //     return groceryListToUpdate;
+    //   });
+    // } catch (err) {
+    //   return err;
+    // }
   }
 
   async deleteById(groceryListId: number): Promise<void> {

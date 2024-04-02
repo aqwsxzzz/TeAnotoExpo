@@ -7,17 +7,28 @@ import { CreateInterListItemDto } from './inter-list-item.dto';
 export class InterListItemService {
   constructor(
     @InjectModel(InterListItem)
-    private interGroupUsersModel: typeof InterListItem,
+    private interListItemModel: typeof InterListItem,
   ) {}
 
-  async create(brand: CreateInterListItemDto): Promise<InterListItem> {
-    const { groceryListId, itemId } = brand;
-    return this.interGroupUsersModel.create({ groceryListId, itemId });
+  async create(interListItem: CreateInterListItemDto): Promise<InterListItem> {
+    const { groceryListId, itemId } = interListItem;
+    return this.interListItemModel.create({ groceryListId, itemId });
   }
 
-  async deleteByItemId(itemId: number, groceryListId: number): Promise<void> {
-    await this.interGroupUsersModel.destroy({
-      where: { itemId, groceryListId },
+  async findAllByGroceryListId(
+    groceryListId: number,
+  ): Promise<InterListItem[]> {
+    return this.interListItemModel.findAll({ where: { groceryListId } });
+  }
+
+  async deleteByItemNgroceryId(
+    interListItem: CreateInterListItemDto,
+  ): Promise<void> {
+    await this.interListItemModel.destroy({
+      where: {
+        itemId: interListItem.itemId,
+        groceryListId: interListItem.groceryListId,
+      },
     });
   }
 }

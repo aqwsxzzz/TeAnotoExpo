@@ -27,11 +27,16 @@ export class GrocerylistController {
   ): Promise<GroceryList[]> {
     return this.grocerylistService.findAllByUserId(userId);
   }
-  @Put('edit/:id')
+  @Put('edit/:groceryListId')
   async findOneandEdit(
     @Body() groceryList: CreateGroceryListDto,
-    @Param('id') groceryListId: number,
+    @Param('groceryListId') groceryListId: number,
   ) {
     return this.grocerylistService.findOneandUpdate(groceryList, groceryListId);
+  }
+
+  @Delete(':groceryListId')
+  async delete(@Param('groceryListId') groceryListId: number) {
+    return this.grocerylistService.deleteById(groceryListId);
   }
 }
