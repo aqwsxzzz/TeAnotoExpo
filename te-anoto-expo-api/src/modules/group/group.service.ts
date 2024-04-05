@@ -20,28 +20,40 @@ export class GroupService {
     return this.groupModel.create({ name, userId });
   }
 
-  async findAllByUserId(userId: number): Promise<Group[]> {
+  async findAllOwnedByUserId(userId: number): Promise<Group[]> {
     return this.groupModel.findAll({ where: { userId } });
+  }
+
+  async findAllUserBelongsTo(userId: number): Promise<InterGroupUsers[]> {
+    return this.interGroupUsersModel.findAll({ where: { userId } });
   }
 
   async findOneandUpdate(
     Group: CreateGroupDto,
     groupId: number,
-  ): Promise<Group | null> {
+    userId: number,
+  ): Promise<Group | null | undefined | Error> {
     const { name } = Group;
 
     try {
-      return await this.sequelize.transaction(async (t) => {
-        const transactionHost = { transaction: t };
+      const group = await this.groupModel.findOne({ where: { id: groupId } });
 
-        const groupToUpdate = await this.groupModel.findByPk(
-          groupId,
-          transactionHost,
-        );
+      if (group?.userId == userId) {
+        return await this.sequelize.transaction(async (t) => {
+          const transactionHost = { transaction: t };
 
-        await groupToUpdate?.update({ name }, transactionHost);
-        return groupToUpdate;
-      });
+          const groupToUpdate = await this.groupModel.findByPk(
+            groupId,
+            transactionHost,
+          );
+
+          await groupToUpdate?.update({ name }, transactionHost);
+          return groupToUpdate;
+        });
+      } else {
+        const error = new CustomError('Unauthorized', 401);
+        return error;
+      }
     } catch (err) {
       return err;
     }
