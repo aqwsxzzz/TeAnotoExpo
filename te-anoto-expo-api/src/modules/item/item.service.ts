@@ -28,43 +28,53 @@ export class ItemService {
       userId,
     });
   }
-  async findAll(): Promise<Item[]> {
-    return this.itemforPricesModel.findAll();
+  async findAllByUserId(userId: number): Promise<Item[]> {
+    return this.itemforPricesModel.findAll({ where: { userId } });
   }
 
   async findOneByPK(itemId: number): Promise<Item | null> {
     return this.itemforPricesModel.findByPk(itemId);
   }
 
-  async findByType(type: string): Promise<Item[]> {
-    return this.itemforPricesModel.findAll({ where: { type } });
+  async findByType(type: string, userId: number): Promise<Item[]> {
+    return this.itemforPricesModel.findAll({ where: { type, userId } });
   }
 
-  async findByBrand(brandId: string): Promise<Item[]> {
-    return this.itemforPricesModel.findAll({ where: { brandId } });
+  async findByBrand(brandId: string, userId: number): Promise<Item[]> {
+    return this.itemforPricesModel.findAll({ where: { brandId, userId } });
   }
 
   async findOneandUpdate(
     item: CreateItemDto,
     itemId: number,
-  ): Promise<Item | null> {
+    userId: number,
+  ): Promise<Item | null | undefined | Error> {
     const { name, brandId, quantity, type } = item;
 
     try {
-      return await this.sequelize.transaction(async (t) => {
-        const transactionHost = { transaction: t };
-
-        const itemToUpdate = await this.itemforPricesModel.findByPk(
-          itemId,
-          transactionHost,
-        );
-
-        await itemToUpdate?.update(
-          { name, brandId, quantity, type },
-          transactionHost,
-        );
-        return itemToUpdate;
+      const item = await this.itemforPricesModel.findOne({
+        where: { id: itemId },
       });
+
+      if (item?.userId == userId) {
+        return await this.sequelize.transaction(async (t) => {
+          const transactionHost = { transaction: t };
+
+          const itemToUpdate = await this.itemforPricesModel.findByPk(
+            itemId,
+            transactionHost,
+          );
+
+          await itemToUpdate?.update(
+            { name, brandId, quantity, type },
+            transactionHost,
+          );
+          return itemToUpdate;
+        });
+      } else {
+        const error = new CustomError('Unauthorized', 401);
+        return error;
+      }
     } catch (err) {
       return err;
     }

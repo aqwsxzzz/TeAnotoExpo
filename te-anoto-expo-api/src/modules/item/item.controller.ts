@@ -21,26 +21,36 @@ export class ItemController {
   ): Promise<Item | undefined> {
     return this.itemService.create(createItemDto);
   }
-  @Get()
-  async findAll(): Promise<Item[]> {
-    return this.itemService.findAll();
+  @Get(':userId')
+  async findAll(@Param('userId') userId: number): Promise<Item[]> {
+    return this.itemService.findAllByUserId(userId);
   }
-  @Get(':id')
-  async findOne(@Param('id') id: number): Promise<Item | null> {
-    return this.itemService.findOneByPK(id);
+  @Get(':itemId')
+  async findOne(@Param('itemId') itemId: number): Promise<Item | null> {
+    return this.itemService.findOneByPK(itemId);
   }
-  @Get('type/:type')
-  async findByType(@Param('type') type: string): Promise<Item[] | null> {
-    return this.itemService.findByType(type);
+  @Get('type/:type/:userId')
+  async findByType(
+    @Param('type') type: string,
+    @Param('userId') userId: number,
+  ): Promise<Item[] | null> {
+    return this.itemService.findByType(type, userId);
   }
-  @Get('brand/:brand')
-  async findByBrand(@Param('type') brand: string): Promise<Item[] | null> {
-    return this.itemService.findByBrand(brand);
+  @Get('brand/:brand/:userId')
+  async findByBrand(
+    @Param('type') brand: string,
+    @Param('userid') userId: number,
+  ): Promise<Item[] | null> {
+    return this.itemService.findByBrand(brand, userId);
   }
 
-  @Put('edit/:id')
-  async findOneandEdit(@Body() item: CreateItemDto, @Param('id') id: number) {
-    return this.itemService.findOneandUpdate(item, id);
+  @Put('edit/:itemId/:userId')
+  async findOneandEdit(
+    @Body() item: CreateItemDto,
+    @Param('itemIdid') itemId: number,
+    @Param('userId') userId: number,
+  ) {
+    return this.itemService.findOneandUpdate(item, itemId, userId);
   }
   @Delete(':id')
   async delete(@Param('id') id: number) {
