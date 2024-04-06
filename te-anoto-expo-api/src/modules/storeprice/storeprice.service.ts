@@ -40,6 +40,14 @@ export class StorepriceService {
     }
   }
 
+  async findByItemId(itemId: number): Promise<StorePrice[]> {
+    return this.storepriceModel.findAll({ where: { itemId } });
+  }
+
+  async findByStoreId(storeId: number): Promise<StorePrice[]> {
+    return this.storepriceModel.findAll({ where: { storeId } });
+  }
+
   async deleteById(storePriceId: number): Promise<void> {
     try {
       return await this.sequelize.transaction(async (t) => {
@@ -56,16 +64,5 @@ export class StorepriceService {
     } catch (err) {
       return err;
     }
-  }
-  async deleteByItemId(itemId: number): Promise<void> {
-    await this.storepriceModel.destroy({
-      where: { itemId: itemId },
-    });
-  }
-  async findByItemId(itemId: number): Promise<StorePrice[]> {
-    return this.storepriceModel.findAll({ where: { itemId } });
-  }
-  async findByStoreId(storeId: number): Promise<StorePrice[]> {
-    return this.storepriceModel.findAll({ where: { storeId } });
   }
 }
