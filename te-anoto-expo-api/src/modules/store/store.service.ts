@@ -26,6 +26,10 @@ export class StoreService {
     return this.storeModel.findAll({ where: { isPublic: true || userId } });
   }
 
+  async findAllByUserId(userId: number): Promise<Store[]> {
+    return this.storeModel.findAll({ where: { userId } });
+  }
+
   async EditByPk(
     store: CreateStoreDto,
     storeId: number,
@@ -58,11 +62,11 @@ export class StoreService {
           transactionHost,
         );
         if (storeToDelete) {
-          await storeToDelete.destroy(transactionHost);
           await this.storePriceModel.destroy({
             where: { storeId: storeId },
             transaction: t,
           });
+          await storeToDelete.destroy(transactionHost);
         }
       });
     } catch (err) {
