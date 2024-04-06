@@ -10,12 +10,15 @@ export class InterGroupUsersService {
     private interGroupUsersModel: typeof InterGroupUsers,
   ) {}
 
-  async create(brand: CreateInterGroupUsers): Promise<InterGroupUsers> {
-    const { userId, groupId } = brand;
+  async create(
+    InterGroupUsers: CreateInterGroupUsers,
+  ): Promise<InterGroupUsers> {
+    const { userId, groupId } = InterGroupUsers;
     return this.interGroupUsersModel.create({ userId, groupId });
   }
 
-  async deleteByUserId(userId: number, groupId: number): Promise<void> {
+  async deleteByUserId(InterGroupUsers: CreateInterGroupUsers): Promise<void> {
+    const { userId, groupId } = InterGroupUsers;
     await this.interGroupUsersModel.destroy({ where: { userId, groupId } });
   }
 }
