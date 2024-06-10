@@ -8,12 +8,10 @@ import huevos from "@/Images/huevos.jpg"
 import yerbahepaticos from "@/Images/yerba-hepaticos.jpg"
 import yerbanerviosos from "@/Images/yerba-nerviosos.jpg"
 import HomeBG from "@/Images/HomeBG.png"
-import MaskedView from "@react-native-masked-view/masked-view";
 
 const itemName = "Productos";
 const storeName = "Tiendas";
 const brandName = "Marcas";
-const paddingTop = StatusBar.currentHeight;
 
 export default function Home() {
 
