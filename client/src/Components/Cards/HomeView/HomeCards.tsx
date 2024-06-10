@@ -9,27 +9,25 @@ let elementsText = null;
 if(elementsArray.length <= 3) {
   elementsText = (
     elementsArray.map((element: itemsTest) =>  
-      <Text key={element.id} className=" text-red-700 text-center text-xl">{element.name}</Text>)
+      <Text key={element.id} className=" text-red-600 text-center text-xl rounded-full">{element.name}</Text>)
   )
 } else {
   const newElementsArray = elementsArray.slice(0, 3);
   elementsText = (
     newElementsArray.map((element: itemsTest) =>  
-      <Text key={element.id} className="text-red-500 text-center text-xl">{element.name}</Text>)
+      <Text key={element.id} className="text-red-600 text-center text-xl rounded-full">{element.name}</Text>)
   )
 
 }
 
   return (
-    <View className="flex items-center justify-center bg-carne-picada">
-    <Text className="text-xl font-bold">{textName}</Text>
-  <View className="flex p-2 items-center justify-center h-44 w-44 border border-black rounded-full">
-    <Image source={carnepicada} className="h-44 w-44 rounded-full absolute z-0 opacity-20"/>
-    <View  className="absolute z-20 text-red-700">
+    <View  className="flex items-center justify-center h-44 w-44 border border-y-blue-700 rounded-full  overflow-hidden">
+    <Image source={carnepicada} className="absolute  h-44 w-44 z-0 opacity-60"/>
+    <View  className="flex items-center justify-center rounded-full absolute z-10 h-44 w-44">
+    <Text className="text-xl font-extrabold ">{textName}</Text>
     {elementsText}
     </View>
-  </View>
-  </View>
+    </View>
   )
 };
 
