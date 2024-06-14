@@ -13,7 +13,7 @@ const itemName = "Productos";
 const storeName = "Tiendas";
 const brandName = "Marcas";
 
-export default function Home() {
+function Home() {
 
   const items: itemsTest[] = [
     {
@@ -55,3 +55,4 @@ export default function Home() {
     </View>
   )
 }
+export default Home;

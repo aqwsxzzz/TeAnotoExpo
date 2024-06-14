@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, ScrollView, TextInput, ImageBackground } from "react-native";
+import { View, Text, Image} from "react-native";
 import itemsTest from "@/Screens/Home/interface";
 import carnepicada from "@/Images/cif-limpiavidrios-recarga.jpg"
 
