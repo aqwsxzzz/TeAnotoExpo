@@ -23,6 +23,9 @@ module.exports = {
       animation: {
         'slide': 'slide 5s linear infinite'
       },
+      backgroundSize: {
+        '50%': '50%',
+      },
       keyframes: {
         slide: {
           '0%': { transform: 'translateX(100%)' },
@@ -54,7 +57,7 @@ module.exports = {
         },
         '.outline-transp': {
           outline: '10px solid transparent'
-        }
+        },
       }
 
       addUtilities(newUtilities, ['responsive', 'hover'])
