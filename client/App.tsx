@@ -15,22 +15,22 @@ function App() {
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{ title: "Home" }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Products"
           component={Products}
-          options={{ title: "Products" }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Brands"
           component={Brands}
-          options={{ title: "Brands" }}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Stores"
           component={Stores}
-          options={{ title: "Stores" }}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

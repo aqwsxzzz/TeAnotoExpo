@@ -8,13 +8,13 @@ import {
 import Card from "@/Components/Cards/HomeView/HomeCards";
 import itemsTest from "./interface";
 import styles from "./styles";
-import carnepicada from "@/Images/carne-picada.jpg";
-import ciflimpiavidriosrecarga from "@/Images/cif-limpiavidrios-recarga.jpg";
-import huevos from "@/Images/huevos.jpg";
-import yerbahepaticos from "@/Images/yerba-hepaticos.jpg";
-import yerbanerviosos from "@/Images/yerba-nerviosos.jpg";
-import HomeBG from "@/Images/HomeBG.png";
-import { HomeScreenProps, RootStackParamList } from "@/interfaces";
+import carnepicada from "@/Assets/Images/carne-picada.jpg";
+import ciflimpiavidriosrecarga from "@/Assets/Images/cif-limpiavidrios-recarga.jpg";
+import huevos from "@/Assets/Images/huevos.jpg";
+import yerbahepaticos from "@/Assets/Images/yerba-hepaticos.jpg";
+import yerbanerviosos from "@/Assets/Images/yerba-nerviosos.jpg";
+import HomeBG from "@/Assets/Images/HomeBG.png";
+import { RootStackParamList } from "@/interfaces";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
@@ -55,7 +55,7 @@ const items: itemsTest[] = [
 ];
 
 function Home() {
-  const navigation = useNavigation<HomeScreenNavigationProp>();
+  const { navigate } = useNavigation<HomeScreenNavigationProp>();
 
   return (
     <View>
@@ -64,13 +64,13 @@ function Home() {
         className="w-screen h-screen absolute bg-contain bg-center"
       >
         <ScrollView contentContainerStyle={styles.homeScrollView1}>
-          <Pressable onPress={() => navigation.navigate("Products")}>
+          <Pressable onPress={() => navigate("Products")}>
             <Card textName={itemName} elementsArray={items} />
           </Pressable>
-          <Pressable onPress={() => navigation.navigate("Stores")}>
+          <Pressable onPress={() => navigate("Stores")}>
             <Card textName={storeName} elementsArray={items} />
           </Pressable>
-          <Pressable onPress={() => navigation.navigate("Brands")}>
+          <Pressable onPress={() => navigate("Brands")}>
             <Card textName={brandName} elementsArray={items} />
           </Pressable>
         </ScrollView>

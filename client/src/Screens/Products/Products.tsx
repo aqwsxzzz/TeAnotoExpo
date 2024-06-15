@@ -1,9 +1,9 @@
 import { ImageBackground, ScrollView, View } from "react-native";
-import ItemsBG from "@/Images/ItemsBG.png"
+import ItemsBG from "@/Assets/Images/ItemsBG.png";
 import GridScrollView from "@/Components/ScrollViews/ScrollView1";
 
 const productos: string[] = [
-"Leche",
+  "Leche",
   "Pan",
   "Huevos",
   "Arroz",
@@ -52,17 +52,19 @@ const productos: string[] = [
   "Crema para el cuerpo",
   "Protector solar",
   "Medicamentos básicos",
-  "Vitaminas"
-]
+  "Vitaminas",
+];
 
- function Products() {
-    return (
-        <View className="pt-10">
-            <ImageBackground source={ItemsBG} className="w-screen h-screen absolute bg-contain bg-center pt-10">
-            <GridScrollView arrayProp={productos}/>
-            </ImageBackground>
-        </View>
-    )
-
-    }
+function Products() {
+  return (
+    <View className="pt-10">
+      <ImageBackground
+        source={ItemsBG}
+        className="w-screen h-screen absolute bg-contain bg-center pt-10"
+      >
+        <GridScrollView arrayProp={productos} />
+      </ImageBackground>
+    </View>
+  );
+}
 export default Products;
