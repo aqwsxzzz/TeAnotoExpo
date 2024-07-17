@@ -1,68 +1,39 @@
-import { ImageBackground, ScrollView, View } from "react-native";
+import { useEffect, useState } from "react";
+import {
+  ImageBackground,
+  Pressable,
+  ScrollView,
+  View,
+  Button,
+  Text,
+} from "react-native";
 import ItemsBG from "@/Assets/Images/ItemsBG.png";
 import GridScrollView from "@/Components/ScrollViews/ScrollView1";
+import { productsManager } from "./Api/ProductsExports";
+import infoInt from "./Api/ProductsExports";
+import GridScrollViewTest from "@/Components/ScrollViews/ScrollViewTest";
+import itemsDB from "@/Components/ScrollViews/interface";
 
-const productos: string[] = [
-  "Leche",
-  "Pan",
-  "Huevos",
-  "Arroz",
-  "Frijoles",
-  "Azúcar",
-  "Sal",
-  "Aceite de cocina",
-  "Pasta",
-  "Café",
-  "Té",
-  "Harina",
-  "Mantequilla",
-  "Queso",
-  "Yogur",
-  "Jugo de naranja",
-  "Refresco",
-  "Agua embotellada",
-  "Cereal",
-  "Galletas",
-  "Chips",
-  "Chocolate",
-  "Helado",
-  "Carne de res",
-  "Pollo",
-  "Pescado",
-  "Jabón",
-  "Champú",
-  "Acondicionador",
-  "Papel higiénico",
-  "Detergente para ropa",
-  "Suavizante",
-  "Desinfectante",
-  "Toallas de papel",
-  "Bolsa de basura",
-  "Limpiador multiusos",
-  "Esponjas",
-  "Platos desechables",
-  "Vasos desechables",
-  "Cubiertos desechables",
-  "Servilletas",
-  "Pañuelos de papel",
-  "Cepillo de dientes",
-  "Pasta dental",
-  "Enjuague bucal",
-  "Desodorante",
-  "Crema para el cuerpo",
-  "Protector solar",
-  "Medicamentos básicos",
-  "Vitaminas",
-];
-
+const info: infoInt = {
+  id: "1",
+  token:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcyMTIyNDI3MSwiZXhwIjoxNzIxMzEwNjcxfQ.9cPTV99zOcKumLCq_uJ5h8Z3gI39II8Jlb8kD9TjQGg",
+};
 function Products() {
+  const { data, isLoading } = productsManager.GetProducts(info);
   return (
     <View className="pt-10">
       <ImageBackground
         source={ItemsBG}
         className="w-screen h-screen absolute bg-contain bg-center pt-10"
       >
-        <GridScrollView arrayProp={productos} />
+        <Pressable className="bg-white w-9 h-9" />
+        <Pressable className="bg-black w-9 h-9" />
+        {isLoading ? (
+          <Text>Loading...</Text>
+        ) : (
+          <GridScrollViewTest arrayProp={data!.data} />
+        )}
       </ImageBackground>
     </View>
   );
