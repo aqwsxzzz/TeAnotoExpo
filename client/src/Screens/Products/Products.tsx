@@ -1,18 +1,8 @@
-import { useEffect, useState } from "react";
-import {
-  ImageBackground,
-  Pressable,
-  ScrollView,
-  View,
-  Button,
-  Text,
-} from "react-native";
+import { ImageBackground, Pressable, View, Text } from "react-native";
 import ItemsBG from "@/Assets/Images/ItemsBG.png";
-import GridScrollView from "@/Components/ScrollViews/ScrollView1";
 import { productsManager } from "./Api/ProductsExports";
 import infoInt from "./Api/ProductsExports";
 import GridScrollViewTest from "@/Components/ScrollViews/ScrollViewTest";
-import itemsDB from "@/Components/ScrollViews/interface";
 
 const info: infoInt = {
   id: "1",

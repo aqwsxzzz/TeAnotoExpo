@@ -1,6 +1,6 @@
-import { ScrollView, View, Text, Animated, Dimensions } from "react-native";
+import { ScrollView, View, Text } from "react-native";
 import GenericPill from "../Pills/GenericPill";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import itemsDB from "./interface";
 
 function GridScrollViewTest({ arrayProp }: { arrayProp: itemsDB[] }) {
