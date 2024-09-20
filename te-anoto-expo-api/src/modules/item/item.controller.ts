@@ -25,7 +25,7 @@ export class ItemController {
   async findAll(@Param('userId') userId: number): Promise<Item[]> {
     return await this.itemService.findAllByUserId(userId);
   }
-  @Get(':itemId')
+  @Get('itemByPK/:itemId')
   async findOne(@Param('itemId') itemId: number): Promise<Item | null> {
     return this.itemService.findOneByPK(itemId);
   }
