@@ -5,6 +5,7 @@ export type RootStackParamList = {
   Products: undefined;
   Brands: undefined;
   Stores: undefined;
+  ItemDetails: { itemId: number };
 };
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
@@ -41,4 +42,12 @@ type StoresScreenNavigationProp = NativeStackNavigationProp<
 
 export interface StoresScreenProps {
   navigation: StoresScreenNavigationProp;
+}
+
+type itemDetailsNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "ItemDetails"
+>;
+export interface itemDetailsProps {
+  navigation: itemDetailsNavigationProp;
 }

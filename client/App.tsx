@@ -6,8 +6,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Brands from "@/Screens/Brands/Brands";
 import Stores from "@/Screens/Stores/Stores";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ItemsDetails from "@/Screens/Products/ItemDetails";
+import { RootStackParamList } from "@/interfaces";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 const queryClient = new QueryClient();
 
 function App() {
@@ -33,6 +35,11 @@ function App() {
           <Stack.Screen
             name="Stores"
             component={Stores}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ItemDetails"
+            component={ItemsDetails}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
