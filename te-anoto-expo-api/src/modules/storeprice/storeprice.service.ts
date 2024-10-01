@@ -55,6 +55,7 @@ export class StorepriceService {
 
       if (storeName) {
         response.push({
+          id: item.id,
           price: item.dataValues.price,
           storeName: storeName.name,
         });
