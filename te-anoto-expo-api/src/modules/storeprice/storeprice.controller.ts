@@ -21,13 +21,13 @@ export class StorepriceController {
   ): Promise<StorePrice | undefined> {
     return this.storePriceService.create(createStorePriceDto);
   }
-  @Get(':itemId/ByItemId')
+  @Get('ByItemId/:itemId')
   async findAllByItemId(
     @Param('itemId') itemId: number,
   ): Promise<StorePrice[]> {
     return this.storePriceService.findByItemId(itemId);
   }
-  @Get(':storeId/ByStoreId')
+  @Get('ByStoreId/:storeId')
   async findAllByStoreId(
     @Param('storeId') storeId: number,
   ): Promise<StorePrice[]> {
