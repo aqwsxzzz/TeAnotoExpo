@@ -10,6 +10,7 @@ import {
 import { StorepriceService } from './storeprice.service';
 import { CreateStorePriceDto } from './storeprice.dto';
 import { StorePrice } from './storeprice.model';
+import { StorePriceWithStoreName } from './interfaces';
 
 @Controller('storeprice')
 export class StorepriceController {
@@ -24,7 +25,7 @@ export class StorepriceController {
   @Get('ByItemId/:itemId')
   async findAllByItemId(
     @Param('itemId') itemId: number,
-  ): Promise<StorePrice[]> {
+  ): Promise<StorePriceWithStoreName[]> {
     return this.storePriceService.findByItemId(itemId);
   }
   @Get('ByStoreId/:storeId')

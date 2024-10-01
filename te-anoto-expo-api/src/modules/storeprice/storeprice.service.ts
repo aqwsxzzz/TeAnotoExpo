@@ -3,12 +3,16 @@ import { InjectModel } from '@nestjs/sequelize';
 import { StorePrice } from './storeprice.model';
 import { CreateStorePriceDto } from './storeprice.dto';
 import { Sequelize } from 'sequelize-typescript';
+import { Store } from '../store/store.model';
+import { StorePriceWithStoreName } from './interfaces';
 
 @Injectable()
 export class StorepriceService {
   constructor(
     @InjectModel(StorePrice)
     private storepriceModel: typeof StorePrice,
+    @InjectModel(Store)
+    private storeModel: typeof Store,
     private sequelize: Sequelize,
   ) {}
 
@@ -40,8 +44,25 @@ export class StorepriceService {
     }
   }
 
-  async findByItemId(itemId: number): Promise<StorePrice[]> {
-    return this.storepriceModel.findAll({ where: { itemId } });
+  async findByItemId(itemId: number): Promise<StorePriceWithStoreName[]> {
+    const response: StorePriceWithStoreName[] = [];
+    const storesArray = await this.storepriceModel.findAll({
+      where: { itemId },
+    });
+
+    for (const item of storesArray) {
+      const storeName = await this.storeModel.findByPk(item.dataValues.storeId);
+
+      if (storeName) {
+        response.push({
+          price: item.dataValues.price,
+          storeName: storeName.name,
+        });
+      }
+    }
+    console.log(response);
+
+    return await response;
   }
 
   async findByStoreId(storeId: number): Promise<StorePrice[]> {
