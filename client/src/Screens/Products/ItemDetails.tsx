@@ -1,7 +1,11 @@
-import { View, Text } from "react-native";
+import { View, Text, ImageBackground } from "react-native";
+import ItemsBG from "@/Assets/Images/ItemsBG.png";
 import infoInt, { productsManager } from "./Api/ProductsExports";
 import { useRoute, RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "@/interfaces";
+import { token } from "@/constants";
+import GenericPill from "@/Components/Pills/GenericPill";
+import storePrices from "./interface";
 
 function ItemsDetails() {
   const route = useRoute<RouteProp<RootStackParamList, "ItemDetails">>();
@@ -9,18 +13,39 @@ function ItemsDetails() {
 
   const info: infoInt = {
     id: itemId,
-    token:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcyNjc4MjgyMSwiZXhwIjoxNzI2ODY5MjIxfQ.QVv-lmFlIZYnz729hR_66HNbUs45jfPMTwxLcTaR2sI",
+    token: token,
   };
 
-  const { data, isLoading } = productsManager.GetProductByItemId(info);
-  isLoading ? console.log("Loading") : console.log(data?.data.name);
+  const { data: dataItem, isLoading: isLoadingItem } =
+    productsManager.GetProductByItemId(info);
+  const { data: dataStorePrices, isLoading: isLoadingStorePrices } =
+    productsManager.GetStorePricesbyItemId(info);
 
   return (
-    <View className="flex justify-center items-center">
-      <View>
-        <Text>{isLoading ? "Loading" : data!.data.name}</Text>
-      </View>
+    <View className="pt-10">
+      <ImageBackground
+        source={ItemsBG}
+        className="w-screen h-screen absolute bg-contain bg-center pt-10"
+      >
+        <View className="flex justify-center items-center ">
+          <Text className="font-extrabold text-3xl">
+            {isLoadingItem ? "Loading" : dataItem!.data.name}
+          </Text>
+        </View>
+        {
+          <View>
+            {isLoadingStorePrices ? (
+              <Text> Loading... </Text>
+            ) : (
+              dataStorePrices!.data.map((storePrices: storePrices) => (
+                <GenericPill key={storePrices.id}>
+                  <Text>{storePrices.price}</Text>
+                </GenericPill>
+              ))
+            )}
+          </View>
+        }
+      </ImageBackground>
     </View>
   );
 }

@@ -1,6 +1,7 @@
 import axios from "axios";
 import infoInt from "@/Screens/Products/Api/ProductsExports";
-const baseUrl = "http://192.168.1.15:3000";
+import { baseUrl } from "@/constants";
+import axiosInstance from "@/axiosConfog";
 
 const getProductsByUserId = async (info: infoInt) => {
   const configurationObject = {
@@ -8,7 +9,9 @@ const getProductsByUserId = async (info: infoInt) => {
     url: `${baseUrl}/items/1`,
     headers: { Authorization: `Bearer ${info.token}` },
   };
-  const response = await axios(configurationObject);
+  //const response = await axios(configurationObject);
+  const response = await axiosInstance.get(`/items/1`);
+
   return response;
 };
 
@@ -18,7 +21,7 @@ const getProductByItemId = async (info: infoInt) => {
     url: `${baseUrl}/items/itemByPK/${info.id}`,
     headers: { Authorization: `Bearer ${info.token}` },
   };
-  const response = await axios(configurationObject);
+  const response = await axiosInstance.get(`/items/itemByPK/${info.id}`);
   return response;
 };
 

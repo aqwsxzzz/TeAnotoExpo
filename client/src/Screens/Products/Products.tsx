@@ -2,11 +2,11 @@ import { ImageBackground, Pressable, View, Text } from "react-native";
 import ItemsBG from "@/Assets/Images/ItemsBG.png";
 import infoInt, { productsManager } from "./Api/ProductsExports";
 import GridScrollViewTest from "@/Components/ScrollViews/ScrollViewTest";
+import { token } from "@/constants";
 
 const info: infoInt = {
   id: 1,
-  token:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcyNjc4MjgyMSwiZXhwIjoxNzI2ODY5MjIxfQ.QVv-lmFlIZYnz729hR_66HNbUs45jfPMTwxLcTaR2sI",
+  token: token,
 };
 function Products() {
   const { data, isLoading } = productsManager.GetProducts(info);

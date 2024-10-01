@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getProductByItemId, getProductsByUserId } from "./getProducts";
+import { getStorePricesbyItemId } from "./getStoresByProducts";
 
 interface infoInt {
   id: number;
@@ -15,13 +16,22 @@ const GetProducts = (info: infoInt) => {
 
 const GetProductByItemId = (info: infoInt) => {
   return useQuery({
-    queryKey: ["Product"],
+    queryKey: ["Product", info.id],
     queryFn: () => getProductByItemId(info),
   });
 };
+
+const GetStorePricesbyItemId = (info: infoInt) => {
+  return useQuery({
+    queryKey: ["StorePrice", info.id],
+    queryFn: () => getStorePricesbyItemId(info),
+  });
+};
+
 export const productsManager = {
   GetProducts,
   GetProductByItemId,
+  GetStorePricesbyItemId,
 };
 
 export default infoInt;
