@@ -1,3 +1,3 @@
-export const baseUrl = "http://192.168.1.15:3000";
+export const baseUrl = "http://192.168.1.8:3000";
 export const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcyNzgwMjcxMCwiZXhwIjoxNzI4NDA3NTEwfQ.degylVukySkaDCiDI_AimuQ5LIiCjgJ13Q-Kj7FT6CE";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcyODEzMTQzNywiZXhwIjoxNzI4NzM2MjM3fQ.jeFJjGX_JScJDgOyIKHLIW_HH5V-5Ic4zPQisGEI6TA";

@@ -1,9 +1,8 @@
 import axios from "axios";
-import { token } from "./constants";
-export const baseUrl = "http://192.168.1.15:3000";
+import { baseUrl, token } from "./constants";
 
 const axiosInstance = axios.create({
-  baseURL: "http://192.168.1.15:3000",
+  baseURL: baseUrl,
   headers: {
     Authorization: `Bearer ${token}`,
   },
