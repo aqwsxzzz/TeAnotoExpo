@@ -16,6 +16,7 @@ function Products() {
         source={ItemsBG}
         className="w-screen h-screen absolute bg-contain bg-center pt-10"
       >
+        <View className="absolute top-0 left-0 w-full bg-red-400 h-5"></View>
         {isLoading ? (
           <Text>Loading...</Text>
         ) : (

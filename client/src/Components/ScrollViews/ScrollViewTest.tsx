@@ -19,7 +19,7 @@ function GridScrollViewTest({ arrayProp }: { arrayProp: itemsDB[] }) {
         onPress={() => navigate("ItemDetails", { itemId: item.id })}
         className="text-white text-center font-extrabold drop-shadow-[0px 1px 2px rgba(0, 0, 0, 1) ] text-4xl text-shadow-black drop-shadow-xl inline-block whitespace-nowrap"
       >
-        <Text>{item.name}</Text>
+        <Text className="font-extrabold text-xl">{item.name}</Text>
       </Pressable>
     </GenericPill>
   ));
